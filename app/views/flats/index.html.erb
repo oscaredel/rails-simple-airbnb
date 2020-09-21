@@ -1,21 +1,24 @@
 <div class="col-12">
-  <h1>All our available flats</h1>
+  <h1>All our available flats <small>(<%= @flats.count %>)</small></h1>
 </div>
 
-<div class="card-deck">
-  <% @flats.each do |flat| %>
-    <div class="card shadow rounded">
-      <img class="card-img-top" src="https://source.unsplash.com/featured/?{living},{room}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title"><%= flat.name %></h5>
-        <p class="card-subtitle"><%= flat.address %></p>
-        <p class="card-text"> <%= flat.description %> </p>
-        <p><i class="fa fa-users m-1"></i><%= flat.number_of_guests %><i class="fas fa-euro-sign ml-4 m-1"></i><%= flat.price_per_night %></p>
+<div class="row">
+  <div class="card-deck">
+    <% @flats.each do |flat| %>
+      <div class="card shadow rounded">
+        <img class="card-img-top" src="https://source.unsplash.com/featured/?{living},{room}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><%= flat.name %></h5>
+          <p class="card-subtitle"><small><%= flat.address %></small></p>
+          <p class="card-text"> <%= flat.description %> </p>
+          <p><i class="fa fa-users m-1"></i><%= flat.number_of_guests %><i class="fas fa-euro-sign ml-4 m-1"></i><%= flat.price_per_night %></p>
+        </div>
+        <div class="card-footer text-muted">
+          <%= link_to "More info", flat_path(flat)%>
+          <%= link_to "Edit", edit_flat_path(flat), class: 'ml-3 text-warning'%>
+          <%= link_to "Remove", flat_path(flat), method: 'DELETE', class: 'ml-3 text-danger', data: { confirm: "Are you sure?" }%>
+        </div>
       </div>
-      <div class="card-footer text-muted">
-        <%= link_to "more info", flat_path(flat) %>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
-
